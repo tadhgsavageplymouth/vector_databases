@@ -52,7 +52,7 @@ def get_user_preferences():
 
 # Step 4: Testing the recommender system
 if __name__ == "__main__":
-    # Initialise the recommender
+    # Initialize the recommender
     recommender = SimpleTravelRecommender()
 
     # Add fake travel data
