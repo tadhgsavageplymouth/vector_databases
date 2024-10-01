@@ -41,7 +41,7 @@ def create_fake_data(recommender):
     recommender.add_destination([15, 40, 80, 0, 1, 1], "Adventure and Culture in Nepal")
     recommender.add_destination([28, 80, 250, 1, 1, 0], "Beach and Adventure in Brazil")
 
-# Step 3: Vectorize user preferences
+# Step 3: Vectorise user preferences
 def get_user_preferences():
     """
     Creates a user preference vector.
@@ -52,7 +52,7 @@ def get_user_preferences():
 
 # Step 4: Testing the recommender system
 if __name__ == "__main__":
-    # Initialize the recommender
+    # Initialise the recommender
     recommender = SimpleTravelRecommender()
 
     # Add fake travel data
