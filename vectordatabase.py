@@ -4,7 +4,7 @@ from scipy.spatial.distance import cosine
 # Step 1: Simple vector database for travel destinations
 class SimpleTravelRecommender:
     def __init__(self):
-        # Initialize the list to store destination vectors and metadata
+        # Initialise the list to store destination vectors and metadata
         self.destinations = []
         self.metadata = []
 
@@ -52,7 +52,7 @@ def get_user_preferences():
 
 # Step 4: Testing the recommender system
 if __name__ == "__main__":
-    # Initialise the recommender
+    # Initialize the recommender
     recommender = SimpleTravelRecommender()
 
     # Add fake travel data
