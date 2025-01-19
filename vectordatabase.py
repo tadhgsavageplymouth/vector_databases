@@ -1,27 +1,41 @@
 import numpy as np
 from scipy.spatial.distance import cosine
 
-# Step 1: Simple vector database for travel destinations
+# Step 1: A simple vector-based travel recommender system
 class SimpleTravelRecommender:
     def __init__(self):
-        # Initialise the list to store destination vectors and metadata
+        """
+        Initialises the list to store destination vectors and their corresponding metadata.
+        """
         self.destinations = []
         self.metadata = []
 
     def add_destination(self, vector, metadata):
         """
-        Adds a destination with its corresponding vector and metadata.
+        Adds a destination with its associated feature vector and metadata.
+        
+        Parameters:
+        - vector: A list of numerical features representing the destination.
+        - metadata: A string containing descriptive information about the destination.
         """
         self.destinations.append(vector)
         self.metadata.append(metadata)
 
     def recommend(self, user_vector, top_k=3):
         """
-        Recommends the top_k destinations based on similarity to the user's vector.
+        Recommends destinations based on their similarity to the user's preferences.
+
+        Parameters:
+        - user_vector: A vector representing the user's preferences.
+        - top_k: The number of top recommendations to return (default is 3).
+
+        Returns:
+        - A list of tuples containing destination metadata and their similarity scores, sorted in descending order of similarity.
         """
         similarities = []
         for i, destination_vector in enumerate(self.destinations):
-            similarity = 1 - cosine(user_vector, destination_vector)  # Cosine similarity
+            # Calculate cosine similarity (1 - cosine distance)
+            similarity = 1 - cosine(user_vector, destination_vector)
             similarities.append((self.metadata[i], similarity))
         
         # Sort destinations by similarity in descending order
@@ -29,11 +43,13 @@ class SimpleTravelRecommender:
 
         return similarities[:top_k]
 
-# Step 2: Fake data for travel destinations
-def create_fake_data(recommender):
+# Step 2: Generate example data for travel destinations
+def create_example_data(recommender):
     """
-    Adds some fake travel destination data to the recommender.
-    The vector format is: [temperature, humidity, daily_cost, beach, adventure, cultural]
+    Populates the recommender with example travel destinations.
+
+    Each destination is represented by a vector with the following format:
+    [temperature, humidity, daily_cost, beach, adventure, cultural]
     """
     recommender.add_destination([30, 70, 150, 1, 0, 0], "Sunny Beach in Thailand")
     recommender.add_destination([20, 50, 200, 0, 1, 0], "Mountain Hiking in Switzerland")
@@ -41,30 +57,35 @@ def create_fake_data(recommender):
     recommender.add_destination([15, 40, 80, 0, 1, 1], "Adventure and Culture in Nepal")
     recommender.add_destination([28, 80, 250, 1, 1, 0], "Beach and Adventure in Brazil")
 
-# Step 3: Vectorise user preferences
+# Step 3: Create a vector for the user's preferences
 def get_user_preferences():
     """
-    Creates a user preference vector.
-    The user preferences format is the same: [preferred_temperature, preferred_humidity, max_daily_cost, beach_preference, adventure_preference, cultural_preference]
+    Generates a feature vector representing the user's travel preferences.
+
+    Format:
+    [preferred_temperature, preferred_humidity, max_daily_cost, beach_preference, adventure_preference, cultural_preference]
+
+    Returns:
+    - A list representing the user's preferences.
     """
-    # Fake user preferences: likes warm weather, medium humidity, low cost, prefers beach and cultural experiences
+    # Example user preferences: warm weather, medium humidity, low cost, prefers beach and cultural experiences
     return [27, 60, 180, 1, 0, 1]
 
-# Step 4: Testing the recommender system
+# Step 4: Test the travel recommender system
 if __name__ == "__main__":
-    # Initialise the recommender
+    # Initialise the travel recommender
     recommender = SimpleTravelRecommender()
 
-    # Add fake travel data
-    create_fake_data(recommender)
+    # Populate the recommender with example destinations
+    create_example_data(recommender)
 
-    # Get user preferences
+    # Generate the user's preference vector
     user_preferences = get_user_preferences()
 
-    # Get top 3 recommendations
+    # Obtain the top 3 recommended destinations
     recommendations = recommender.recommend(user_preferences, top_k=3)
 
-    # Output the results
+    # Display the recommendations
     print("Top 3 Recommended Destinations:")
     for destination, similarity in recommendations:
         print(f"Destination: {destination}, Similarity: {similarity:.4f}")
